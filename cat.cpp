@@ -1,4 +1,11 @@
 #include "cat.h"
+#include <opencv4/opencv2/opencv.hpp>
+
+
+void cat::detect() {
+
+}
+
 
 int cat::getX() {
 

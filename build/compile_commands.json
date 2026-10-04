@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/noah/snowStorm/build",
+  "command": "/usr/bin/g++  -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/snowStorm.dir/main.cpp.o -c /home/noah/snowStorm/main.cpp",
+  "file": "/home/noah/snowStorm/main.cpp",
+  "output": "CMakeFiles/snowStorm.dir/main.cpp.o"
+}
+]
