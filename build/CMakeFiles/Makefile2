@@ -85,12 +85,12 @@ clean: CMakeFiles/snowStorm.dir/clean
 CMakeFiles/snowStorm.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snowStorm.dir/build.make CMakeFiles/snowStorm.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snowStorm.dir/build.make CMakeFiles/snowStorm.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/noah/snowStorm/build/CMakeFiles --progress-num=1,2 "Built target snowStorm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/noah/snowStorm/build/CMakeFiles --progress-num=1,2,3 "Built target snowStorm"
 .PHONY : CMakeFiles/snowStorm.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/snowStorm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/noah/snowStorm/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/noah/snowStorm/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/snowStorm.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/noah/snowStorm/build/CMakeFiles 0
 .PHONY : CMakeFiles/snowStorm.dir/rule
@@ -102,7 +102,7 @@ snowStorm: CMakeFiles/snowStorm.dir/rule
 # codegen rule for target.
 CMakeFiles/snowStorm.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snowStorm.dir/build.make CMakeFiles/snowStorm.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/noah/snowStorm/build/CMakeFiles --progress-num=1,2 "Finished codegen for target snowStorm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/noah/snowStorm/build/CMakeFiles --progress-num=1,2,3 "Finished codegen for target snowStorm"
 .PHONY : CMakeFiles/snowStorm.dir/codegen
 
 # clean rule for target.

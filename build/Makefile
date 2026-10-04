@@ -129,6 +129,30 @@ snowStorm/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snowStorm.dir/build.make CMakeFiles/snowStorm.dir/build
 .PHONY : snowStorm/fast
 
+cat.o: cat.cpp.o
+.PHONY : cat.o
+
+# target to build an object file
+cat.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snowStorm.dir/build.make CMakeFiles/snowStorm.dir/cat.cpp.o
+.PHONY : cat.cpp.o
+
+cat.i: cat.cpp.i
+.PHONY : cat.i
+
+# target to preprocess a source file
+cat.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snowStorm.dir/build.make CMakeFiles/snowStorm.dir/cat.cpp.i
+.PHONY : cat.cpp.i
+
+cat.s: cat.cpp.s
+.PHONY : cat.s
+
+# target to generate assembly for a file
+cat.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snowStorm.dir/build.make CMakeFiles/snowStorm.dir/cat.cpp.s
+.PHONY : cat.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... snowStorm"
+	@echo "... cat.o"
+	@echo "... cat.i"
+	@echo "... cat.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

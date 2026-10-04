@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/snowStorm.dir/link.d"
+  "CMakeFiles/snowStorm.dir/cat.cpp.o"
+  "CMakeFiles/snowStorm.dir/cat.cpp.o.d"
   "CMakeFiles/snowStorm.dir/main.cpp.o"
   "CMakeFiles/snowStorm.dir/main.cpp.o.d"
   "snowStorm"

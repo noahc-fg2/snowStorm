@@ -1,3 +1,7 @@
+#ifndef CAT_H
+#define CAT_H
+
+
 class cat{
 
 
@@ -12,3 +16,5 @@ class cat{
         int getY();
 
 };
+
+#endif // CAT_Hs

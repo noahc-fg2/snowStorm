@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/noah/snowStorm/cat.cpp" "CMakeFiles/snowStorm.dir/cat.cpp.o" "gcc" "CMakeFiles/snowStorm.dir/cat.cpp.o.d"
   "/home/noah/snowStorm/main.cpp" "CMakeFiles/snowStorm.dir/main.cpp.o" "gcc" "CMakeFiles/snowStorm.dir/main.cpp.o.d"
   "" "snowStorm" "gcc" "CMakeFiles/snowStorm.dir/link.d"
   )

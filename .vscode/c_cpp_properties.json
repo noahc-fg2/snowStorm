@@ -6,7 +6,9 @@
                 "${workspaceFolder}/**",
                 "/lib/**",
                 "/usr/lib/**",
-                "/opt/**"
+                "/opt/**",
+                "/usr/include/**",
+                "/usr/include/opencv4/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

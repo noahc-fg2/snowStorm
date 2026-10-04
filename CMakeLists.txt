@@ -13,5 +13,7 @@ find_package(OpenCV 4.10 REQUIRED)
 message(STATUS "Found OpenCV version: ${OpenCV_VERSION}")
 message(STATUS "OpenCV include directories: ${OpenCV_INCLUDE_DIRS}")
 
-add_executable(snowStorm main.cpp)
+add_executable(snowStorm main.cpp cat.cpp)
+
 target_link_libraries(snowStorm PRIVATE ${OpenCV_LIBS})
+
