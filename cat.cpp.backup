@@ -1,0 +1,492 @@
+#include "cat.h"
+#include <opencv4/opencv2/opencv.hpp>
+#include <opencv4/opencv2/video.hpp>
+#include <opencv4/opencv2/objdetect.hpp>
+#include <algorithm>
+#include <onnxruntime_cxx_api.h>
+
+
+cat::cat()
+    : env(ORT_LOGGING_LEVEL_WARNING, "CatDetector"),
+      sessionOptions(),
+      session(nullptr)
+{
+    sessionOptions.SetIntraOpNumThreads(4);
+
+    sessionOptions.SetGraphOptimizationLevel(
+        GraphOptimizationLevel::ORT_ENABLE_ALL
+    );
+
+    OrtCUDAProviderOptions cuda_options{};
+    cuda_options.device_id = 0;
+
+    sessionOptions.AppendExecutionProvider_CUDA(cuda_options);
+
+    const char* modelPath = "yolo11n.onnx";
+
+    session = std::make_unique<Ort::Session>(
+        env,
+        modelPath,
+        sessionOptions
+    );
+}
+cat::state cat::detect(cv::Mat& frame)
+{
+    // --------------------------------
+    // Calculate tile dimensions
+    // --------------------------------
+
+    int halfHeight = frame.rows / 2;
+    int halfWidth  = frame.cols / 2;
+
+    // --------------------------------
+    // Create the five tiles
+    // --------------------------------
+
+    cv::Mat frameTL = frame(
+        cv::Rect(
+            0,
+            0,
+            halfWidth,
+            halfHeight
+        )
+    );
+
+    cv::Mat frameTR = frame(
+        cv::Rect(
+            halfWidth,
+            0,
+            halfWidth,
+            halfHeight
+        )
+    );
+
+    cv::Mat frameBL = frame(
+        cv::Rect(
+            0,
+            halfHeight,
+            halfWidth,
+            halfHeight
+        )
+    );
+
+    cv::Mat frameBR = frame(
+        cv::Rect(
+            halfWidth,
+            halfHeight,
+            halfWidth,
+            halfHeight
+        )
+    );
+
+    cv::Mat frameC = frame(
+        cv::Rect(
+            halfWidth / 2,
+            halfHeight / 2,
+            halfWidth,
+            halfHeight
+        )
+    );
+
+    // --------------------------------
+    // Store all detections
+    // --------------------------------
+
+    std::vector<detection> detections;
+
+    // --------------------------------
+    // Top Left
+    // --------------------------------
+/*
+    std::vector<detection> detectionsTL =
+        detectOnTile(frameTL);
+
+    for (auto& d : detectionsTL)
+    {
+        d.location = tile::TopLeft;
+
+        // Local tile coordinates -> full frame
+        d.box.x += 0;
+        d.box.y += 0;
+
+        detections.push_back(d);
+    }
+
+    // --------------------------------
+    // Top Right
+    // --------------------------------
+
+    std::vector<detection> detectionsTR =
+        detectOnTile(frameTR);
+
+    for (auto& d : detectionsTR)
+    {
+        d.location = tile::TopRight;
+
+        // Move box into full-frame coordinates
+        d.box.x += halfWidth;
+        d.box.y += 0;
+
+        detections.push_back(d);
+    }
+
+    // --------------------------------
+    // Bottom Left
+    // --------------------------------
+
+    std::vector<detection> detectionsBL =
+        detectOnTile(frameBL);
+
+    for (auto& d : detectionsBL)
+    {
+        d.location = tile::BottomLeft;
+
+        // Move box into full-frame coordinates
+        d.box.x += 0;
+        d.box.y += halfHeight;
+
+        detections.push_back(d);
+    }
+
+    // --------------------------------
+    // Bottom Right
+    // --------------------------------
+
+    std::vector<detection> detectionsBR =
+        detectOnTile(frameBR);
+
+    for (auto& d : detectionsBR)
+    {
+        d.location = tile::BottomRight;
+
+        // Move box into full-frame coordinates
+        d.box.x += halfWidth;
+        d.box.y += halfHeight;
+
+        detections.push_back(d);
+    }
+*/
+    // --------------------------------
+    // Center
+    // --------------------------------
+
+    std::vector<detection> detectionsC =
+        detectOnTile(frameC);
+
+    for (auto& d : detectionsC)
+    {
+        d.location = tile::Center;
+
+        // Center tile starts at:
+        // x = halfWidth / 2
+        // y = halfHeight / 2
+
+        d.box.x += halfWidth / 2;
+        d.box.y += halfHeight / 2;
+
+        detections.push_back(d);
+    }
+
+    // --------------------------------
+    // Draw bounding boxes
+    // --------------------------------
+
+    for (const auto& d : detections)
+    {
+        cv::rectangle(
+            frame,
+            d.box,
+            cv::Scalar(0, 255, 0),
+            3
+        );
+
+        std::string label =
+            "Cat " + std::to_string(d.confidence);
+
+        cv::putText(
+            frame,
+            label,
+            cv::Point(
+                d.box.x,
+                d.box.y - 10
+            ),
+            cv::FONT_HERSHEY_SIMPLEX,
+            0.7,
+            cv::Scalar(0, 255, 0),
+            2
+        );
+    }
+
+    // --------------------------------
+    // Determine state
+    // --------------------------------
+
+    if (detections.empty())
+    {
+        return state::NotFound;
+    }
+
+    return state::Found;
+}
+
+
+
+
+int cat::getX(std::vector<cat::detection> detections) {
+
+    return 0;
+}
+
+int cat::getY(std::vector<cat::detection> detections) {
+
+    return 0;
+}
+
+std::vector<cat::detection> cat::detectOnTile(
+    const cv::Mat& subFrame)
+{
+    std::vector<cat::detection> detections;
+
+    // -------------------------
+    // Preprocess
+    // -------------------------
+
+    cat::PreprocessedFrame prepared =
+        preprocessFrame(subFrame);
+
+    cv::Mat preparedFrame = prepared.image;
+
+    // -------------------------
+    // Convert HWC -> CHW
+    // -------------------------
+
+    std::vector<float> inputTensorValues(
+        3 * 640 * 640
+    );
+
+    for (int y = 0; y < 640; y++)
+    {
+        for (int x = 0; x < 640; x++)
+        {
+            cv::Vec3f pixel =
+                preparedFrame.at<cv::Vec3f>(y, x);
+
+            inputTensorValues[
+                0 * 640 * 640 +
+                y * 640 +
+                x
+            ] = pixel[0];
+
+            inputTensorValues[
+                1 * 640 * 640 +
+                y * 640 +
+                x
+            ] = pixel[1];
+
+            inputTensorValues[
+                2 * 640 * 640 +
+                y * 640 +
+                x
+            ] = pixel[2];
+        }
+    }
+
+    // -------------------------
+    // ONNX input tensor
+    // -------------------------
+
+    std::array<int64_t, 4> inputShape = {
+        1, 3, 640, 640
+    };
+
+    Ort::MemoryInfo memoryInfo =
+        Ort::MemoryInfo::CreateCpu(
+            OrtArenaAllocator,
+            OrtMemTypeDefault
+        );
+
+    Ort::Value inputTensor =
+        Ort::Value::CreateTensor<float>(
+            memoryInfo,
+            inputTensorValues.data(),
+            inputTensorValues.size(),
+            inputShape.data(),
+            inputShape.size()
+        );
+
+    // -------------------------
+    // Run YOLO
+    // -------------------------
+
+    const char* inputNames[] = {
+        "images"
+    };
+
+    const char* outputNames[] = {
+        "output0"
+    };
+
+    auto outputTensors = session->Run(
+        Ort::RunOptions{nullptr},
+        inputNames,
+        &inputTensor,
+        1,
+        outputNames,
+        1
+    );
+
+    // -------------------------
+    // Get YOLO output
+    // -------------------------
+
+    float* output =
+        outputTensors[0].GetTensorMutableData<float>();
+
+    constexpr int numCandidates = 8400;
+    constexpr int numClasses = 80;
+
+    // -------------------------
+    // Decode detections
+    // -------------------------
+
+    for (int i = 0; i < numCandidates; i++)
+    {
+        float cx =
+            output[0 * numCandidates + i];
+
+        float cy =
+            output[1 * numCandidates + i];
+
+        float width =
+            output[2 * numCandidates + i];
+
+        float height =
+            output[3 * numCandidates + i];
+
+        // COCO class 15 = cat
+        float confidence =
+            output[(4 + 15) * numCandidates + i];
+
+        //std::cout<< "Cat confidence: "<< confidence<< std::endl;
+        if (confidence < 0.20f)
+            continue;
+
+        // YOLO coordinates are relative
+        // to the 640x640 letterboxed image.
+        float x1 =
+            (cx - width / 2.0f
+             - prepared.offsetX)
+            / prepared.scale;
+
+        float y1 =
+            (cy - height / 2.0f
+             - prepared.offsetY)
+            / prepared.scale;
+
+        float x2 =
+            (cx + width / 2.0f
+             - prepared.offsetX)
+            / prepared.scale;
+
+        float y2 =
+            (cy + height / 2.0f
+             - prepared.offsetY)
+            / prepared.scale;
+
+        int left =
+            static_cast<int>(x1);
+
+        int top =
+            static_cast<int>(y1);
+
+        int right =
+            static_cast<int>(x2);
+
+        int bottom =
+            static_cast<int>(y2);
+
+        cv::Rect box(
+            left,
+            top,
+            right - left,
+            bottom - top
+        );
+
+        // Keep the detection inside
+        // the local tile.
+        box &= cv::Rect(
+            0,
+            0,
+            subFrame.cols,
+            subFrame.rows
+        );
+
+        if (box.area() <= 0)
+            continue;
+
+        cat::detection detection;
+
+        detection.classID = 15;
+        detection.box = box;
+        detection.confidence = confidence;
+
+        detections.push_back(detection);
+    }
+
+    return detections;
+}
+   
+cat::PreprocessedFrame cat::preprocessFrame(const cv::Mat& subFrame){
+    PreprocessedFrame result;
+
+    result.scale = std::min(
+        640.0f / subFrame.cols,
+        640.0f / subFrame.rows
+    );
+
+    const int newWidth = static_cast<int>(
+        subFrame.cols * result.scale
+    );
+
+    const int newHeight = static_cast<int>(
+        subFrame.rows * result.scale
+    );
+
+    result.offsetX = (640 - newWidth) / 2;
+    result.offsetY = (640 - newHeight) / 2;
+
+    cv::Mat resizedFrame;
+    cv::resize(
+        subFrame,
+        resizedFrame,
+        cv::Size(newWidth, newHeight)
+    );
+
+    // Initialize the entire canvas before copying into it.
+    cv::Mat letterboxed(
+        640, 640, CV_8UC3,
+        cv::Scalar(114, 114, 114)
+    );
+
+    resizedFrame.copyTo(letterboxed(cv::Rect(
+        result.offsetX,
+        result.offsetY,
+        newWidth,
+        newHeight
+    )));
+
+    cv::Mat rgbFrame;
+    cv::cvtColor(
+        letterboxed,
+        rgbFrame,
+        cv::COLOR_BGR2RGB
+    );
+
+    rgbFrame.convertTo(
+        result.image,
+        CV_32FC3,
+        1.0 / 255.0
+    );
+
+    return result;
+}

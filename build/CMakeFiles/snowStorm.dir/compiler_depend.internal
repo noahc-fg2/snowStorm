@@ -4,6 +4,10 @@
 CMakeFiles/snowStorm.dir/cat.cpp.o
  /home/noah/snowStorm/cat.cpp
  /home/noah/snowStorm/cat.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_c_api.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_api.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_inline.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_float16.h
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h
  /usr/include/asm-generic/errno-base.h
@@ -106,6 +110,7 @@ CMakeFiles/snowStorm.dir/cat.cpp.o
  /usr/include/c++/14/bits/stl_tree.h
  /usr/include/c++/14/bits/stl_uninitialized.h
  /usr/include/c++/14/bits/stl_vector.h
+ /usr/include/c++/14/bits/stream_iterator.h
  /usr/include/c++/14/bits/streambuf.tcc
  /usr/include/c++/14/bits/streambuf_iterator.h
  /usr/include/c++/14/bits/string_view.tcc
@@ -155,6 +160,7 @@ CMakeFiles/snowStorm.dir/cat.cpp.o
  /usr/include/c++/14/iosfwd
  /usr/include/c++/14/iostream
  /usr/include/c++/14/istream
+ /usr/include/c++/14/iterator
  /usr/include/c++/14/limits
  /usr/include/c++/14/list
  /usr/include/c++/14/locale
@@ -432,6 +438,7 @@ CMakeFiles/snowStorm.dir/cat.cpp.o
  /usr/lib/gcc/x86_64-linux-gnu/14/include/mm_malloc.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/mmintrin.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h
+ /usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/syslimits.h
@@ -445,6 +452,10 @@ CMakeFiles/snowStorm.dir/cat.cpp.o
 CMakeFiles/snowStorm.dir/main.cpp.o
  /home/noah/snowStorm/main.cpp
  /home/noah/snowStorm/cat.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_c_api.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_api.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_inline.h
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_float16.h
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h
  /usr/include/asm-generic/errno-base.h
@@ -547,6 +558,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o
  /usr/include/c++/14/bits/stl_tree.h
  /usr/include/c++/14/bits/stl_uninitialized.h
  /usr/include/c++/14/bits/stl_vector.h
+ /usr/include/c++/14/bits/stream_iterator.h
  /usr/include/c++/14/bits/streambuf.tcc
  /usr/include/c++/14/bits/streambuf_iterator.h
  /usr/include/c++/14/bits/string_view.tcc
@@ -596,6 +608,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o
  /usr/include/c++/14/iosfwd
  /usr/include/c++/14/iostream
  /usr/include/c++/14/istream
+ /usr/include/c++/14/iterator
  /usr/include/c++/14/limits
  /usr/include/c++/14/list
  /usr/include/c++/14/locale
@@ -873,6 +886,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o
  /usr/lib/gcc/x86_64-linux-gnu/14/include/mm_malloc.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/mmintrin.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h
+ /usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h
  /usr/lib/gcc/x86_64-linux-gnu/14/include/syslimits.h
@@ -885,6 +899,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o
 
 snowStorm
  /lib/libarmadillo.so.14
+ /lib/onnxruntime-linux-x64-gpu-1.20.1/lib/libonnxruntime.so
  /lib/x86_64-linux-gnu/libabsl_throw_delegate.so.20240722
  /lib/x86_64-linux-gnu/libc.so.6
  /lib/x86_64-linux-gnu/libcairo-gobject.so.2
@@ -909,7 +924,6 @@ snowStorm
  /usr/lib/x86_64-linux-gnu/libIlmThread-3_1.so.30
  /usr/lib/x86_64-linux-gnu/libImath-3_1.so.29
  /usr/lib/x86_64-linux-gnu/libLerc.so.4
- /usr/lib/x86_64-linux-gnu/libOpenCL.so.1
  /usr/lib/x86_64-linux-gnu/libOpenEXR-3_1.so.30
  /usr/lib/x86_64-linux-gnu/libOpenGL.so.0
  /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
@@ -1172,6 +1186,7 @@ snowStorm
  /usr/lib/x86_64-linux-gnu/libresolv.so.2
  /usr/lib/x86_64-linux-gnu/librist.so.4
  /usr/lib/x86_64-linux-gnu/librsvg-2.so.2
+ /usr/lib/x86_64-linux-gnu/librt.so.1
  /usr/lib/x86_64-linux-gnu/librtmp.so.1
  /usr/lib/x86_64-linux-gnu/librttopo.so.1
  /usr/lib/x86_64-linux-gnu/libsasl2.so.2
@@ -1232,6 +1247,7 @@ snowStorm
  /usr/lib/x86_64-linux-gnu/libzmq.so.5
  /usr/lib/x86_64-linux-gnu/libzstd.so.1
  /usr/lib/x86_64-linux-gnu/libzvbi.so.0
+ /usr/local/cuda-12.4/lib64/libOpenCL.so.1
  /home/noah/snowStorm/build/CMakeFiles/snowStorm.dir/cat.cpp.o
  /home/noah/snowStorm/build/CMakeFiles/snowStorm.dir/main.cpp.o
 

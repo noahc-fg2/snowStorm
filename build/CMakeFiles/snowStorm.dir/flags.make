@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /usr/include/opencv4
+CXX_INCLUDES = -I/lib/onnxruntime-linux-x64-gpu-1.20.1/include -isystem /usr/include/opencv4
 
 CXX_FLAGS = -g -std=gnu++17
 

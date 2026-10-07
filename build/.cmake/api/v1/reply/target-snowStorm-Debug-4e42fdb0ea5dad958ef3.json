@@ -11,7 +11,8 @@
 		"commands" : 
 		[
 			"add_executable",
-			"target_link_libraries"
+			"target_link_libraries",
+			"target_include_directories"
 		],
 		"files" : 
 		[
@@ -25,13 +26,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 16,
+				"line" : 24,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 18,
+				"line" : 39,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 34,
 				"parent" : 0
 			}
 		]
@@ -47,6 +54,10 @@
 			],
 			"includes" : 
 			[
+				{
+					"backtrace" : 3,
+					"path" : "/lib/onnxruntime-linux-x64-gpu-1.20.1/include"
+				},
 				{
 					"backtrace" : 2,
 					"isSystem" : true,
@@ -81,6 +92,10 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/lib/onnxruntime-linux-x64-gpu-1.20.1/lib:/usr/local/cuda-12.4/lib64",
+				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
@@ -260,6 +275,11 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.4.10.0",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/lib/onnxruntime-linux-x64-gpu-1.20.1/lib/libonnxruntime.so",
 				"role" : "libraries"
 			},
 			{

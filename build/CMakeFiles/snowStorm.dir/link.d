@@ -40,6 +40,7 @@ snowStorm: \
   /usr/lib/x86_64-linux-gnu/libopencv_wechat_qrcode.so.4.10.0 \
   /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.4.10.0 \
   /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.4.10.0 \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/lib/libonnxruntime.so \
   /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.4.10.0 \
   /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.4.10.0 \
   /usr/lib/x86_64-linux-gnu/libopencv_plot.so.4.10.0 \
@@ -85,15 +86,18 @@ snowStorm: \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o \
+  /usr/lib/x86_64-linux-gnu/libdl.so.2 \
+  /usr/lib/x86_64-linux-gnu/librt.so.1 \
+  /usr/lib/x86_64-linux-gnu/libpthread.so.0 \
+  /lib/x86_64-linux-gnu/libm.so.6 \
+  /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/x86_64-linux-gnu/libOpenGL.so.0 \
   /usr/lib/x86_64-linux-gnu/libQt5Test.so.5 \
   /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5 \
-  /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.10.0 \
   /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5 \
   /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5 \
   /usr/lib/x86_64-linux-gnu/libQt5Core.so.5 \
   /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.4.10.0 \
-  /lib/x86_64-linux-gnu/libm.so.6 \
   /usr/lib/x86_64-linux-gnu/libdc1394.so.25 \
   /usr/lib/x86_64-linux-gnu/libgstbase-1.0.so.0 \
   /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 \
@@ -115,7 +119,6 @@ snowStorm: \
   /usr/lib/x86_64-linux-gnu/liblapack.so.3 \
   /usr/lib/x86_64-linux-gnu/libblas.so.3 \
   /usr/lib/x86_64-linux-gnu/libtbb.so.12 \
-  /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/x86_64-linux-gnu/libGLdispatch.so.0 \
   /usr/lib/x86_64-linux-gnu/libGL.so.1 \
   /usr/lib/x86_64-linux-gnu/libpng16.so.16 \
@@ -191,7 +194,7 @@ snowStorm: \
   /usr/lib/x86_64-linux-gnu/libvdpau.so.1 \
   /usr/lib/x86_64-linux-gnu/libX11.so.6 \
   /usr/lib/x86_64-linux-gnu/libdrm.so.2 \
-  /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 \
+  /usr/local/cuda-12.4/lib64/libOpenCL.so.1 \
   /usr/lib/x86_64-linux-gnu/libltdl.so.7 \
   /usr/lib/x86_64-linux-gnu/libexif.so.12 \
   /usr/lib/x86_64-linux-gnu/libgfortran.so.5 \
@@ -299,8 +302,6 @@ snowStorm: \
   /usr/lib/x86_64-linux-gnu/libXfixes.so.3 \
   /usr/lib/x86_64-linux-gnu/libX11-xcb.so.1 \
   /usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0 \
-  /usr/lib/x86_64-linux-gnu/libdl.so.2 \
-  /usr/lib/x86_64-linux-gnu/libpthread.so.0 \
   /usr/lib/x86_64-linux-gnu/libnghttp3.so.9 \
   /usr/lib/x86_64-linux-gnu/libngtcp2_crypto_gnutls.so.8 \
   /usr/lib/x86_64-linux-gnu/libngtcp2.so.16 \
@@ -470,6 +471,8 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.4.10.0:
 
+/lib/onnxruntime-linux-x64-gpu-1.20.1/lib/libonnxruntime.so:
+
 /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.4.10.0:
 
 /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.4.10.0:
@@ -560,13 +563,21 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o:
 
+/usr/lib/x86_64-linux-gnu/libdl.so.2:
+
+/usr/lib/x86_64-linux-gnu/librt.so.1:
+
+/usr/lib/x86_64-linux-gnu/libpthread.so.0:
+
+/lib/x86_64-linux-gnu/libm.so.6:
+
+/lib64/ld-linux-x86-64.so.2:
+
 /usr/lib/x86_64-linux-gnu/libOpenGL.so.0:
 
 /usr/lib/x86_64-linux-gnu/libQt5Test.so.5:
 
 /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5:
-
-/usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.10.0:
 
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5:
 
@@ -575,8 +586,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5:
 
 /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.4.10.0:
-
-/lib/x86_64-linux-gnu/libm.so.6:
 
 /usr/lib/x86_64-linux-gnu/libdc1394.so.25:
 
@@ -619,8 +628,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/lib/x86_64-linux-gnu/libblas.so.3:
 
 /usr/lib/x86_64-linux-gnu/libtbb.so.12:
-
-/lib64/ld-linux-x86-64.so.2:
 
 /usr/lib/x86_64-linux-gnu/libGLdispatch.so.0:
 
@@ -772,7 +779,7 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libdrm.so.2:
 
-/usr/lib/x86_64-linux-gnu/libOpenCL.so.1:
+/usr/local/cuda-12.4/lib64/libOpenCL.so.1:
 
 /usr/lib/x86_64-linux-gnu/libltdl.so.7:
 
@@ -987,10 +994,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/lib/x86_64-linux-gnu/libX11-xcb.so.1:
 
 /usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0:
-
-/usr/lib/x86_64-linux-gnu/libdl.so.2:
-
-/usr/lib/x86_64-linux-gnu/libpthread.so.0:
 
 /usr/lib/x86_64-linux-gnu/libnghttp3.so.9:
 

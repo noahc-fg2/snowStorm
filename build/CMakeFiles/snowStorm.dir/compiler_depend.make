@@ -3,6 +3,10 @@
 
 CMakeFiles/snowStorm.dir/cat.cpp.o: /home/noah/snowStorm/cat.cpp \
   /home/noah/snowStorm/cat.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_c_api.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_api.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_inline.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_float16.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
@@ -105,6 +109,7 @@ CMakeFiles/snowStorm.dir/cat.cpp.o: /home/noah/snowStorm/cat.cpp \
   /usr/include/c++/14/bits/stl_tree.h \
   /usr/include/c++/14/bits/stl_uninitialized.h \
   /usr/include/c++/14/bits/stl_vector.h \
+  /usr/include/c++/14/bits/stream_iterator.h \
   /usr/include/c++/14/bits/streambuf.tcc \
   /usr/include/c++/14/bits/streambuf_iterator.h \
   /usr/include/c++/14/bits/string_view.tcc \
@@ -154,6 +159,7 @@ CMakeFiles/snowStorm.dir/cat.cpp.o: /home/noah/snowStorm/cat.cpp \
   /usr/include/c++/14/iosfwd \
   /usr/include/c++/14/iostream \
   /usr/include/c++/14/istream \
+  /usr/include/c++/14/iterator \
   /usr/include/c++/14/limits \
   /usr/include/c++/14/list \
   /usr/include/c++/14/locale \
@@ -431,6 +437,7 @@ CMakeFiles/snowStorm.dir/cat.cpp.o: /home/noah/snowStorm/cat.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/mm_malloc.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/mmintrin.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/syslimits.h \
@@ -443,6 +450,10 @@ CMakeFiles/snowStorm.dir/cat.cpp.o: /home/noah/snowStorm/cat.cpp \
 
 CMakeFiles/snowStorm.dir/main.cpp.o: /home/noah/snowStorm/main.cpp \
   /home/noah/snowStorm/cat.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_c_api.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_api.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_inline.h \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_float16.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
@@ -545,6 +556,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o: /home/noah/snowStorm/main.cpp \
   /usr/include/c++/14/bits/stl_tree.h \
   /usr/include/c++/14/bits/stl_uninitialized.h \
   /usr/include/c++/14/bits/stl_vector.h \
+  /usr/include/c++/14/bits/stream_iterator.h \
   /usr/include/c++/14/bits/streambuf.tcc \
   /usr/include/c++/14/bits/streambuf_iterator.h \
   /usr/include/c++/14/bits/string_view.tcc \
@@ -594,6 +606,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o: /home/noah/snowStorm/main.cpp \
   /usr/include/c++/14/iosfwd \
   /usr/include/c++/14/iostream \
   /usr/include/c++/14/istream \
+  /usr/include/c++/14/iterator \
   /usr/include/c++/14/limits \
   /usr/include/c++/14/list \
   /usr/include/c++/14/locale \
@@ -871,6 +884,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o: /home/noah/snowStorm/main.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/mm_malloc.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/mmintrin.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/syslimits.h \
@@ -882,6 +896,7 @@ CMakeFiles/snowStorm.dir/main.cpp.o: /home/noah/snowStorm/main.cpp \
   /usr/lib/linux/uapi/x86/asm/types.h
 
 snowStorm: /lib/libarmadillo.so.14 \
+  /lib/onnxruntime-linux-x64-gpu-1.20.1/lib/libonnxruntime.so \
   /lib/x86_64-linux-gnu/libabsl_throw_delegate.so.20240722 \
   /lib/x86_64-linux-gnu/libc.so.6 \
   /lib/x86_64-linux-gnu/libcairo-gobject.so.2 \
@@ -906,7 +921,6 @@ snowStorm: /lib/libarmadillo.so.14 \
   /usr/lib/x86_64-linux-gnu/libIlmThread-3_1.so.30 \
   /usr/lib/x86_64-linux-gnu/libImath-3_1.so.29 \
   /usr/lib/x86_64-linux-gnu/libLerc.so.4 \
-  /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 \
   /usr/lib/x86_64-linux-gnu/libOpenEXR-3_1.so.30 \
   /usr/lib/x86_64-linux-gnu/libOpenGL.so.0 \
   /usr/lib/x86_64-linux-gnu/libQt5Core.so.5 \
@@ -1169,6 +1183,7 @@ snowStorm: /lib/libarmadillo.so.14 \
   /usr/lib/x86_64-linux-gnu/libresolv.so.2 \
   /usr/lib/x86_64-linux-gnu/librist.so.4 \
   /usr/lib/x86_64-linux-gnu/librsvg-2.so.2 \
+  /usr/lib/x86_64-linux-gnu/librt.so.1 \
   /usr/lib/x86_64-linux-gnu/librtmp.so.1 \
   /usr/lib/x86_64-linux-gnu/librttopo.so.1 \
   /usr/lib/x86_64-linux-gnu/libsasl2.so.2 \
@@ -1229,6 +1244,7 @@ snowStorm: /lib/libarmadillo.so.14 \
   /usr/lib/x86_64-linux-gnu/libzmq.so.5 \
   /usr/lib/x86_64-linux-gnu/libzstd.so.1 \
   /usr/lib/x86_64-linux-gnu/libzvbi.so.0 \
+  /usr/local/cuda-12.4/lib64/libOpenCL.so.1 \
   CMakeFiles/snowStorm.dir/cat.cpp.o \
   CMakeFiles/snowStorm.dir/main.cpp.o
 
@@ -1301,6 +1317,8 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/librtmp.so.1:
 
+/usr/lib/x86_64-linux-gnu/librt.so.1:
+
 /usr/lib/x86_64-linux-gnu/librist.so.4:
 
 /usr/lib/x86_64-linux-gnu/libraw1394.so.11:
@@ -1344,6 +1362,8 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/lib/x86_64-linux-gnu/libopenmpt.so.0:
 
 /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.4.10.0:
+
+/usr/local/cuda-12.4/lib64/libOpenCL.so.1:
 
 /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.10.0:
 
@@ -1543,6 +1563,18 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libdvdread.so.8:
 
+/usr/lib/x86_64-linux-gnu/libdrm.so.2:
+
+/usr/lib/x86_64-linux-gnu/libopus.so.0:
+
+/usr/lib/x86_64-linux-gnu/libdfalt.so.0:
+
+/usr/lib/x86_64-linux-gnu/libngtcp2_crypto_gnutls.so.8:
+
+/usr/lib/x86_64-linux-gnu/libdeflate.so.0:
+
+/usr/lib/x86_64-linux-gnu/libdc1394.so.25:
+
 /usr/include/opencv4/opencv2/dnn/utils/inference_engine.hpp:
 
 /usr/include/opencv4/opencv2/dnn/dnn.inl.hpp:
@@ -1560,6 +1592,8 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/include/opencv4/opencv2/core/utility.hpp:
 
 /usr/include/c++/14/bits/unique_ptr.h:
+
+/usr/include/c++/14/iterator:
 
 /usr/lib/x86_64-linux-gnu/libdatrie.so.1:
 
@@ -1617,15 +1651,13 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/c++/14/map:
 
-/usr/include/opencv4/opencv2/flann.hpp:
-
 /usr/include/linux/types.h:
+
+/lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_inline.h:
 
 /usr/include/linux/errno.h:
 
 /usr/lib/x86_64-linux-gnu/libaec.so.0:
-
-/usr/include/opencv4/opencv2/flann/any.h:
 
 /usr/include/c++/14/pstl/execution_defs.h:
 
@@ -1638,14 +1670,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h:
 
 /usr/include/c++/14/unordered_map:
-
-/usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.4.10.0:
-
-/usr/include/opencv4/opencv2/flann/all_indices.h:
-
-/usr/include/c++/14/tuple:
-
-/usr/include/opencv4/opencv2/opencv.hpp:
 
 /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.4.10.0:
 
@@ -1671,15 +1695,21 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/c++/14/sstream:
 
+/usr/include/c++/14/cmath:
+
 /usr/lib/x86_64-linux-gnu/libsnappy.so.1:
 
 /usr/include/c++/14/bits/stl_algo.h:
 
-/usr/include/c++/14/cmath:
-
 /usr/include/c++/14/ratio:
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
+
+/usr/include/opencv4/opencv2/core/fast_math.hpp:
+
+/usr/include/locale.h:
+
+/usr/include/c++/14/queue:
 
 /usr/include/c++/14/tr1/hypergeometric.tcc:
 
@@ -1769,47 +1799,13 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/opencv4/opencv2/stitching/detail/warpers_inl.hpp:
 
-/usr/lib/x86_64-linux-gnu/libopencv_videoio.so.4.10.0:
-
-/usr/include/opencv4/opencv2/core/matx.hpp:
-
-/usr/lib/x86_64-linux-gnu/libwebp.so.7:
-
-/usr/include/opencv4/opencv2/core/cvstd_wrapper.hpp:
-
-/usr/lib/x86_64-linux-gnu/liburiparser.so.1:
-
-/usr/include/opencv4/opencv2/core/cuda.hpp:
-
-/usr/include/c++/14/bits/memory_resource.h:
-
-/usr/include/c++/14/bits/node_handle.h:
-
-/usr/include/features.h:
-
-/usr/include/endian.h:
-
-/usr/include/opencv4/opencv2/photo.hpp:
-
-/usr/lib/x86_64-linux-gnu/libgdal.so.36:
-
-/usr/include/stdint.h:
-
-/usr/include/c++/14/bits/localefwd.h:
-
-/usr/include/c++/14/bits/sstream.tcc:
-
-/usr/lib/x86_64-linux-gnu/libgstpbutils-1.0.so.0:
-
-/usr/include/c++/14/bits/stl_set.h:
-
 /usr/include/c++/14/bits/locale_facets_nonio.h:
-
-/usr/include/opencv4/opencv2/flann/allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
 /home/noah/snowStorm/cat.cpp:
+
+/lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_float16.h:
 
 /usr/lib/x86_64-linux-gnu/libjbig.so.0:
 
@@ -1822,10 +1818,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/include/c++/14/bits/list.tcc:
 
 /usr/include/opencv4/opencv2/opencv_modules.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/include/opencv4/opencv2/core/check.hpp:
 
 /usr/include/c++/14/bits/atomic_base.h:
 
@@ -1895,67 +1887,31 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/c++/14/bits/cpp_type_traits.h:
 
+/usr/include/c++/14/tr1/riemann_zeta.tcc:
+
+/usr/include/c++/14/bits/basic_string.h:
+
+/usr/lib/x86_64-linux-gnu/libXau.so.6:
+
+/usr/include/c++/14/clocale:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h:
+
+/usr/lib/x86_64-linux-gnu/libogg.so.0:
+
+/usr/lib/x86_64-linux-gnu/libLerc.so.4:
+
+/usr/include/c++/14/bits/basic_string.tcc:
+
+/usr/include/c++/14/bits/stl_vector.h:
+
+/usr/include/c++/14/deque:
+
 /usr/include/c++/14/istream:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so:
 
-/usr/include/linux/posix_types.h:
-
-/usr/include/c++/14/bits/locale_classes.tcc:
-
-/usr/lib/x86_64-linux-gnu/libwebpmux.so.3:
-
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
-/usr/include/libintl.h:
-
-/usr/include/opencv4/opencv2/stitching/detail/exposure_compensate.hpp:
-
-/usr/include/opencv4/opencv2/core/base.hpp:
-
-/usr/include/c++/14/climits:
-
-/usr/lib/x86_64-linux-gnu/libbluray.so.2:
-
-/usr/include/c++/14/bits/hash_bytes.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/usr/lib/x86_64-linux-gnu/crtn.o:
-
-/usr/include/opencv4/opencv2/stitching/detail/camera.hpp:
-
-/usr/include/c++/14/bits/ostream_insert.h:
-
 /usr/include/c++/14/bits/stl_pair.h:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5:
-
-/usr/include/c++/14/ios:
-
-/usr/lib/x86_64-linux-gnu/libm.so:
-
-/usr/include/c++/14/cctype:
-
-/usr/lib/x86_64-linux-gnu/libplc4.so:
-
-/usr/lib/gcc/x86_64-linux-gnu/14/include/emmintrin.h:
-
-/usr/include/c++/14/bits/exception.h:
-
-/usr/include/assert.h:
-
-/usr/include/c++/14/bits/stl_iterator_base_funcs.h:
-
-/usr/lib/x86_64-linux-gnu/libspatialite.so.8:
-
-/usr/include/c++/14/array:
-
-/usr/include/opencv4/opencv2/flann/dist.h:
-
-/usr/include/opencv4/opencv2/core/persistence.hpp:
 
 /usr/include/opencv4/opencv2/flann/kmeans_index.h:
 
@@ -1963,9 +1919,11 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h:
 
-/usr/include/opencv4/opencv2/features2d.hpp:
+/usr/lib/x86_64-linux-gnu/libgstpbutils-1.0.so.0:
 
-/usr/include/c++/14/tr1/special_function_util.h:
+/usr/include/c++/14/bits/stl_set.h:
+
+/usr/include/c++/14/bits/sstream.tcc:
 
 /usr/include/linux/stddef.h:
 
@@ -1993,14 +1951,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/c++/14/bits/cxxabi_init_exception.h:
 
-/usr/include/opencv4/opencv2/core/matx.inl.hpp:
-
-/usr/include/c++/14/bits/exception_defines.h:
-
-/usr/include/opencv4/opencv2/core/cv_cpu_dispatch.h:
-
-/usr/include/c++/14/bits/shared_ptr.h:
-
 /usr/include/c++/14/bits/stringfwd.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
@@ -2010,10 +1960,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 /usr/include/c++/14/bits/quoted_string.h:
 
 /usr/lib/x86_64-linux-gnu/libGLX.so.0:
-
-/usr/lib/x86_64-linux-gnu/libOpenEXR-3_1.so.30:
-
-/usr/include/alloca.h:
 
 /usr/include/c++/14/bits/algorithmfwd.h:
 
@@ -2025,21 +1971,65 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libabsl_debugging_internal.so.20240722:
 
-/usr/include/c++/14/deque:
+/lib/x86_64-linux-gnu/libm.so.6:
 
-/usr/include/opencv4/opencv2/core/saturate.hpp:
+/usr/include/c++/14/bits/locale_conv.h:
 
-/usr/include/c++/14/bits/allocated_ptr.h:
+/usr/lib/x86_64-linux-gnu/libassuan.so.9:
 
-/usr/lib/x86_64-linux-gnu/libjson-c.so.5:
+/usr/include/c++/14/bits/hash_bytes.h:
 
-/usr/lib/x86_64-linux-gnu/libabsl_strings.so.20240722:
+/usr/include/c++/14/bits/ostream_insert.h:
 
-/usr/include/opencv4/opencv2/objdetect/barcode.hpp:
+/usr/include/opencv4/opencv2/stitching/detail/camera.hpp:
 
-/usr/include/c++/14/bits/stl_deque.h:
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
+/usr/lib/x86_64-linux-gnu/crtn.o:
+
+/usr/include/c++/14/math.h:
+
+/usr/include/c++/14/tr1/bessel_function.tcc:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/c++/14/bits/stl_construct.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/alloca.h:
+
+/usr/lib/x86_64-linux-gnu/libOpenEXR-3_1.so.30:
+
+/usr/include/c++/14/bits/locale_classes.tcc:
+
+/usr/lib/x86_64-linux-gnu/libwebpmux.so.3:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/libintl.h:
+
+/usr/include/opencv4/opencv2/stitching/detail/exposure_compensate.hpp:
+
+/usr/include/opencv4/opencv2/core/base.hpp:
+
+/usr/include/c++/14/climits:
+
+/usr/lib/x86_64-linux-gnu/libbluray.so.2:
+
+/lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_cxx_api.h:
+
+/usr/include/c++/14/bits/predefined_ops.h:
+
+/usr/lib/x86_64-linux-gnu/libopencv_dnn_superres.so.4.10.0:
+
+/usr/include/c++/14/bits/parse_numbers.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/lib/x86_64-linux-gnu/libdouble-conversion.so.3:
+
+/usr/include/c++/14/streambuf:
 
 /usr/include/errno.h:
 
@@ -2057,6 +2047,58 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/opencv4/opencv2/flann/result_set.h:
 
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5:
+
+/usr/include/c++/14/ios:
+
+/usr/lib/x86_64-linux-gnu/libm.so:
+
+/usr/include/c++/14/string:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/c++config.h:
+
+/usr/include/opencv4/opencv2/objdetect/graphical_code_detector.hpp:
+
+/usr/lib/x86_64-linux-gnu/libmd.so.0:
+
+/usr/include/c++/14/cstring:
+
+/usr/include/c++/14/bits/charconv.h:
+
+/usr/include/c++/14/bits/basic_ios.tcc:
+
+/usr/include/c++/14/bits/streambuf.tcc:
+
+/usr/include/opencv4/opencv2/core/matx.inl.hpp:
+
+/usr/include/c++/14/bits/exception_defines.h:
+
+/usr/include/opencv4/opencv2/core/cv_cpu_dispatch.h:
+
+/usr/include/c++/14/bits/shared_ptr.h:
+
+/usr/include/opencv4/opencv2/core/saturate.hpp:
+
+/usr/include/c++/14/bits/allocated_ptr.h:
+
+/usr/include/c++/14/bits/stl_deque.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
+
+/usr/include/c++/14/cctype:
+
+/usr/lib/x86_64-linux-gnu/libplc4.so:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/include/emmintrin.h:
+
+/usr/include/c++/14/bits/exception.h:
+
+/usr/include/c++/14/tuple:
+
+/usr/include/opencv4/opencv2/opencv.hpp:
+
 /usr/include/linux/limits.h:
 
 /usr/include/c++/14/backward/auto_ptr.h:
@@ -2065,27 +2107,17 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/c++/14/bits/cxxabi_forced.h:
 
-/usr/include/c++/14/tr1/riemann_zeta.tcc:
+/usr/include/assert.h:
 
-/usr/include/c++/14/bits/basic_string.h:
+/usr/include/c++/14/bits/stl_iterator_base_funcs.h:
 
-/usr/lib/x86_64-linux-gnu/libXau.so.6:
+/usr/lib/x86_64-linux-gnu/libspatialite.so.8:
 
-/usr/include/opencv4/opencv2/core.hpp:
+/usr/include/c++/14/array:
 
-/lib/x86_64-linux-gnu/libm.so.6:
+/usr/lib/x86_64-linux-gnu/libdvdnav.so.4:
 
-/usr/include/c++/14/bits/locale_conv.h:
-
-/usr/lib/x86_64-linux-gnu/libassuan.so.9:
-
-/usr/include/c++/14/complex:
-
-/usr/include/c++/14/math.h:
-
-/usr/include/c++/14/tr1/bessel_function.tcc:
-
-/usr/include/asm-generic/posix_types.h:
+/usr/include/c++/14/backward/binders.h:
 
 /usr/include/c++/14/bits/alloc_traits.h:
 
@@ -2097,10 +2129,6 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /usr/include/c++/14/bits/std_abs.h:
 
-/usr/include/c++/14/bits/memoryfwd.h:
-
-/home/noah/snowStorm/cat.h:
-
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
 /usr/include/c++/14/bits/stl_raw_storage_iter.h:
@@ -2111,41 +2139,59 @@ CMakeFiles/snowStorm.dir/cat.cpp.o:
 
 /lib/x86_64-linux-gnu/libc.so.6:
 
-/usr/include/c++/14/bits/basic_ios.tcc:
+/usr/include/endian.h:
 
-/usr/include/c++/14/bits/charconv.h:
+/usr/include/opencv4/opencv2/photo.hpp:
 
-/usr/include/opencv4/opencv2/objdetect/graphical_code_detector.hpp:
+/usr/lib/x86_64-linux-gnu/libgdal.so.36:
 
-/usr/lib/x86_64-linux-gnu/libmd.so.0:
+/usr/include/stdint.h:
 
-/usr/include/c++/14/cstring:
+/usr/include/c++/14/bits/localefwd.h:
 
-/usr/include/c++/14/bits/streambuf.tcc:
+/usr/lib/x86_64-linux-gnu/libjson-c.so.5:
+
+/usr/include/opencv4/opencv2/objdetect/barcode.hpp:
+
+/usr/lib/x86_64-linux-gnu/libabsl_strings.so.20240722:
+
+/usr/include/opencv4/opencv2/core.hpp:
+
+/usr/lib/x86_64-linux-gnu/liburiparser.so.1:
+
+/usr/include/opencv4/opencv2/core/cuda.hpp:
+
+/usr/include/c++/14/bits/memory_resource.h:
+
+/usr/lib/x86_64-linux-gnu/libwebp.so.7:
+
+/usr/include/opencv4/opencv2/core/cvstd_wrapper.hpp:
+
+/usr/lib/x86_64-linux-gnu/libopencv_videoio.so.4.10.0:
+
+/usr/include/opencv4/opencv2/core/matx.hpp:
+
+/home/noah/snowStorm/cat.h:
+
+/usr/include/c++/14/bits/memoryfwd.h:
+
+/usr/include/opencv4/opencv2/core/persistence.hpp:
+
+/usr/include/opencv4/opencv2/flann/dist.h:
+
+/usr/include/c++/14/bits/node_handle.h:
+
+/usr/include/features.h:
+
+/usr/include/c++/14/complex:
 
 /usr/include/c++/14/bits/nested_exception.h:
 
-/usr/include/c++/14/bits/basic_string.tcc:
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/c++/14/bits/stl_vector.h:
+/usr/include/opencv4/opencv2/core/operations.hpp:
 
-/usr/include/c++/14/clocale:
-
-/usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h:
-
-/usr/lib/x86_64-linux-gnu/libogg.so.0:
-
-/usr/lib/x86_64-linux-gnu/libLerc.so.4:
-
-/usr/lib/x86_64-linux-gnu/libopencv_dnn_superres.so.4.10.0:
-
-/usr/include/c++/14/bits/parse_numbers.h:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/c++/14/bits/predefined_ops.h:
-
-/usr/include/c++/14/bits/stl_construct.h:
+/usr/include/c++/14/bits/stl_bvector.h:
 
 /usr/include/c++/14/bits/range_access.h:
 
@@ -2205,11 +2251,9 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
+/usr/include/c++/14/bits/stream_iterator.h:
 
-/usr/include/opencv4/opencv2/core/operations.hpp:
-
-/usr/include/c++/14/bits/stl_bvector.h:
+/usr/include/opencv4/opencv2/imgproc/segmentation.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
@@ -2218,6 +2262,8 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 /usr/include/opencv4/opencv2/objdetect.hpp:
 
 /usr/include/c++/14/vector:
+
+/lib/onnxruntime-linux-x64-gpu-1.20.1/include/onnxruntime_c_api.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
@@ -2249,9 +2295,23 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 
 /usr/include/opencv4/opencv2/highgui.hpp:
 
-/usr/include/c++/14/string:
+/usr/include/c++/14/tr1/special_function_util.h:
 
-/usr/include/x86_64-linux-gnu/c++/14/bits/c++config.h:
+/usr/include/opencv4/opencv2/features2d.hpp:
+
+/usr/include/opencv4/opencv2/flann.hpp:
+
+/usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.4.10.0:
+
+/usr/include/opencv4/opencv2/flann/all_indices.h:
+
+/usr/include/opencv4/opencv2/flann/allocator.h:
+
+/usr/include/opencv4/opencv2/flann/any.h:
+
+/usr/include/opencv4/opencv2/core/check.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/opencv4/opencv2/flann/composite_index.h:
 
@@ -2264,12 +2324,6 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 /usr/include/opencv4/opencv2/flann/defines.h:
 
 /usr/include/opencv4/opencv2/flann/dynamic_bitset.h:
-
-/usr/lib/x86_64-linux-gnu/libngtcp2_crypto_gnutls.so.8:
-
-/usr/lib/x86_64-linux-gnu/libdeflate.so.0:
-
-/usr/lib/x86_64-linux-gnu/libdrm.so.2:
 
 /usr/include/math.h:
 
@@ -2330,8 +2384,6 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 /usr/include/opencv4/opencv2/flann/random.h:
 
 /usr/include/opencv4/opencv2/imgcodecs.hpp:
-
-/usr/include/opencv4/opencv2/imgproc/segmentation.hpp:
 
 /usr/lib/x86_64-linux-gnu/libgraphite2.so.3:
 
@@ -2517,6 +2569,8 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h:
+
 /usr/lib/x86_64-linux-gnu/libatomic.so.1:
 
 /usr/include/opencv4/opencv2/flann/params.h:
@@ -2625,6 +2679,10 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 
 /home/noah/snowStorm/main.cpp:
 
+/lib/onnxruntime-linux-x64-gpu-1.20.1/lib/libonnxruntime.so:
+
+/usr/lib/x86_64-linux-gnu/libGL.so.1:
+
 /lib/x86_64-linux-gnu/libabsl_throw_delegate.so.20240722:
 
 /usr/lib/linux/uapi/x86/asm/posix_types_64.h:
@@ -2657,21 +2715,11 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a:
 
-/usr/lib/x86_64-linux-gnu/libGL.so.1:
-
 /usr/lib/x86_64-linux-gnu/libIlmThread-3_1.so.30:
 
 /usr/lib/x86_64-linux-gnu/libImath-3_1.so.29:
 
 /usr/lib/x86_64-linux-gnu/libcairo.so.2:
-
-/usr/include/opencv4/opencv2/core/fast_math.hpp:
-
-/usr/include/locale.h:
-
-/usr/include/c++/14/queue:
-
-/usr/lib/x86_64-linux-gnu/libOpenCL.so.1:
 
 /usr/include/c++/14/utility:
 
@@ -2798,17 +2846,3 @@ CMakeFiles/snowStorm.dir/main.cpp.o:
 /usr/lib/x86_64-linux-gnu/libcurl.so.4:
 
 /usr/lib/x86_64-linux-gnu/libdav1d.so.7:
-
-/usr/lib/x86_64-linux-gnu/libdc1394.so.25:
-
-/usr/lib/x86_64-linux-gnu/libopus.so.0:
-
-/usr/lib/x86_64-linux-gnu/libdfalt.so.0:
-
-/usr/include/c++/14/streambuf:
-
-/usr/lib/x86_64-linux-gnu/libdouble-conversion.so.3:
-
-/usr/include/c++/14/backward/binders.h:
-
-/usr/lib/x86_64-linux-gnu/libdvdnav.so.4:

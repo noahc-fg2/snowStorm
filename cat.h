@@ -2,12 +2,16 @@
 #define CAT_H
 #include <opencv4/opencv2/opencv.hpp>
 #include <vector>
-#include <onnx/onnxruntime_cxx_api.h>
+#include <onnxruntime_cxx_api.h>
+#include <memory>
 
 class cat{
 
 
     public:
+
+        cat();
+
         enum class tile {
             TopLeft,
             TopRight,
@@ -31,14 +35,21 @@ class cat{
             tile location;
         };
 
-        state detect(const cv::Mat& frame);
+        struct PreprocessedFrame {
+            cv::Mat image;
+            float scale;
+            int offsetX;
+            int offsetY;
+        };
+
+        state detect(cv::Mat& frame);
 
     private:
         
         int getX(std::vector<cat::detection> detections);
         int getY(std::vector<cat::detection> detections);
-        std::vector<detection> detectOnTile(const cv::Mat& subFrame, tile t);
-        cv::Mat preprocessFrame(const cv::Mat& frame);
+        std::vector<detection> detectOnTile(const cv::Mat& subFrame);
+        cat::PreprocessedFrame preprocessFrame(const cv::Mat& frame);
 
 
         Ort::Env env{ORT_LOGGING_LEVEL_WARNING, "snowStorm"};
