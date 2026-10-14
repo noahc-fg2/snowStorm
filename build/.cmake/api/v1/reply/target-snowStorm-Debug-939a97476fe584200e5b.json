@@ -94,7 +94,7 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "-Wl,-rpath,/lib/onnxruntime-linux-x64-gpu-1.20.1/lib:/usr/local/cuda-12.4/lib64",
+				"fragment" : "-Wl,-rpath,/lib/onnxruntime-linux-x64-gpu-1.20.1/lib:/opt/cudnn-9.10/lib:/usr/local/cuda-12.4/lib64",
 				"role" : "libraries"
 			},
 			{

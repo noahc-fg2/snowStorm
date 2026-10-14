@@ -1,4 +1,5 @@
 #include "cat.h"
+#include <iostream>
 #include <opencv4/opencv2/opencv.hpp>
 #include <opencv4/opencv2/video.hpp>
 #include <opencv4/opencv2/objdetect.hpp>
@@ -11,17 +12,38 @@ cat::cat()
       sessionOptions(),
       session(nullptr)
 {
-    sessionOptions.SetIntraOpNumThreads(4);
+    OrtCUDAProviderOptionsV2* cuda_options = nullptr;
+    Ort::GetApi().ReleaseCUDAProviderOptions(cuda_options);
+    sessionOptions.SetIntraOpNumThreads(8);
 
     sessionOptions.SetGraphOptimizationLevel(
         GraphOptimizationLevel::ORT_ENABLE_ALL
     );
 
-    OrtCUDAProviderOptions cuda_options{};
-    cuda_options.device_id = 0;
+    sessionOptions.SetLogSeverityLevel(0);
 
-    sessionOptions.AppendExecutionProvider_CUDA(cuda_options);
+    Ort::ThrowOnError(
+        Ort::GetApi().CreateCUDAProviderOptions(&cuda_options));
 
+    const char* keys[] = {
+        "device_id",
+        "cudnn_conv_algo_search",
+        "cudnn_conv_use_max_workspace"
+    };
+
+    const char* values[] = {
+        "0",
+        "HEURISTIC",
+        "0"
+    };
+
+    Ort::ThrowOnError(
+        Ort::GetApi().UpdateCUDAProviderOptions(
+            cuda_options, keys, values, 3));
+
+    sessionOptions.AppendExecutionProvider_CUDA_V2(*cuda_options);
+
+    
     const char* modelPath = "yolo11n.onnx";
 
     session = std::make_unique<Ort::Session>(
@@ -29,142 +51,221 @@ cat::cat()
         modelPath,
         sessionOptions
     );
-}
-cat::state cat::detect(cv::Mat& frame)
+}   
+
+cat::~cat()
 {
+    session.reset();
+    env = nullptr;
+}
+
+cat::tile cat::detect(cv::Mat& frame, cat::tile targetTile)
+{
+    cat::tile nextTile = cat::tile::TopLeft;
+    // --------------------------------
+    // Calculate tile dimensions
+    // --------------------------------
+
     int halfHeight = frame.rows / 2;
     int halfWidth  = frame.cols / 2;
 
-    cv::Mat frameTL = frame(cv::Rect(0, 0, halfWidth, halfHeight));
-    cv::Mat frameTR = frame(cv::Rect(halfWidth, 0, halfWidth, halfHeight));
-    cv::Mat frameBL = frame(cv::Rect(0, halfHeight, halfWidth, halfHeight));
-    cv::Mat frameBR = frame(cv::Rect(halfWidth, halfHeight, halfWidth, halfHeight));
-    cv::Mat frameC = frame(cv::Rect(halfWidth / 2, halfHeight / 2, halfWidth, halfHeight));
+    // --------------------------------
+    // Create the five tiles
+    // --------------------------------
 
-    std::array<cv::Mat, 5> tiles = { frameTL, frameTR, frameBL, frameBR, frameC };
-    std::array<tile, 5> locations = {
-        tile::TopLeft, tile::TopRight, tile::BottomLeft,
-        tile::BottomRight, tile::Center
-    };
-    std::array<cv::Point, 5> origins = {
-        cv::Point(0, 0),
-        cv::Point(halfWidth, 0),
-        cv::Point(0, halfHeight),
-        cv::Point(halfWidth, halfHeight),
-        cv::Point(halfWidth / 2, halfHeight / 2)
-    };
+    cv::Mat frameTL = frame(
+        cv::Rect(
+            0,
+            0,
+            halfWidth,
+            halfHeight
+        )
+    );
 
-    constexpr int batchSize = 5;
-    constexpr int channels = 3;
-    constexpr int inputWidth = 640;
-    constexpr int inputHeight = 640;
-    constexpr int imageSize = channels * inputWidth * inputHeight;
-    constexpr int numCandidates = 8400;
-    constexpr int numClasses = 80;
-    constexpr int outputChannels = 4 + numClasses;
+    cv::Mat frameTR = frame(
+        cv::Rect(
+            halfWidth,
+            0,
+            halfWidth,
+            halfHeight
+        )
+    );
 
-    std::array<PreprocessedFrame, batchSize> prepared;
-    std::vector<float> inputTensorValues(batchSize * imageSize);
+    cv::Mat frameBL = frame(
+        cv::Rect(
+            0,
+            halfHeight,
+            halfWidth,
+            halfHeight
+        )
+    );
 
-    for (int n = 0; n < batchSize; ++n)
-    {
-        prepared[n] = preprocessFrame(tiles[n]);
-        const cv::Mat& image = prepared[n].image;
-        float* dst = inputTensorValues.data() + n * imageSize;
+    cv::Mat frameBR = frame(
+        cv::Rect(
+            halfWidth,
+            halfHeight,
+            halfWidth,
+            halfHeight
+        )
+    );
 
-        for (int y = 0; y < inputHeight; ++y)
-        {
-            const cv::Vec3f* row = image.ptr<cv::Vec3f>(y);
-            for (int x = 0; x < inputWidth; ++x)
-            {
-                dst[0 * inputWidth * inputHeight + y * inputWidth + x] = row[x][0];
-                dst[1 * inputWidth * inputHeight + y * inputWidth + x] = row[x][1];
-                dst[2 * inputWidth * inputHeight + y * inputWidth + x] = row[x][2];
-            }
-        }
-    }
+    cv::Mat frameC = frame(
+        cv::Rect(
+            halfWidth / 2,
+            halfHeight / 2,
+            halfWidth,
+            halfHeight
+        )
+    );
 
-    std::array<int64_t, 4> inputShape = { batchSize, channels, inputHeight, inputWidth };
+    // --------------------------------
+    // Store all detections
+    // --------------------------------
 
-    Ort::MemoryInfo memoryInfo = Ort::MemoryInfo::CreateCpu(
-        OrtArenaAllocator, OrtMemTypeDefault);
-
-    Ort::Value inputTensor = Ort::Value::CreateTensor<float>(
-        memoryInfo,
-        inputTensorValues.data(),
-        inputTensorValues.size(),
-        inputShape.data(),
-        inputShape.size());
-
-    const char* inputNames[] = { "images" };
-    const char* outputNames[] = { "output0" };
-
-    auto outputTensors = session->Run(
-        Ort::RunOptions{nullptr},
-        inputNames,
-        &inputTensor,
-        1,
-        outputNames,
-        1);
-
-    float* output = outputTensors[0].GetTensorMutableData<float>();
     std::vector<detection> detections;
 
-    for (int n = 0; n < batchSize; ++n)
-    {
-        const size_t batchOffset =
-            static_cast<size_t>(n) * outputChannels * numCandidates;
+    switch (targetTile) {
+        case tile::TopLeft:
+            // --------------------------------
+            // Top Left
+            // --------------------------------
 
-        for (int i = 0; i < numCandidates; ++i)
-        {
-            float cx = output[batchOffset + 0 * numCandidates + i];
-            float cy = output[batchOffset + 1 * numCandidates + i];
-            float width = output[batchOffset + 2 * numCandidates + i];
-            float height = output[batchOffset + 3 * numCandidates + i];
-            float confidence = output[
-                batchOffset + (4 + 15) * numCandidates + i];
+            detections = detectOnTile(frameTL);
+            for (auto& d : detections)
+            {
+                d.location = tile::TopLeft;
 
-            if (confidence < 0.20f)
-                continue;
+                // Local tile coordinates -> full frame
+                d.box.x += 0;
+                d.box.y += 0;
 
-            float x1 = (cx - width / 2.0f - prepared[n].offsetX) / prepared[n].scale;
-            float y1 = (cy - height / 2.0f - prepared[n].offsetY) / prepared[n].scale;
-            float x2 = (cx + width / 2.0f - prepared[n].offsetX) / prepared[n].scale;
-            float y2 = (cy + height / 2.0f - prepared[n].offsetY) / prepared[n].scale;
+            }
 
-            cv::Rect box(
-                static_cast<int>(x1),
-                static_cast<int>(y1),
-                static_cast<int>(x2 - x1),
-                static_cast<int>(y2 - y1));
+            if (detections.empty())
+                nextTile = tile::TopRight;
+            break;
 
-            box &= cv::Rect(0, 0, tiles[n].cols, tiles[n].rows);
-            if (box.area() <= 0)
-                continue;
+        case tile::TopRight:
+            // --------------------------------
+            // Top Right
+            // --------------------------------
 
-            detection d;
-            d.classID = 15;
-            d.box = box;
-            d.confidence = confidence;
-            d.location = locations[n];
-            d.box.x += origins[n].x;
-            d.box.y += origins[n].y;
-            detections.push_back(d);
-        }
+            detections = detectOnTile(frameTR);
+            for (auto& d : detections)
+            {
+                d.location = tile::TopRight;
+
+                // Move box into full-frame coordinates
+                d.box.x += halfWidth;
+                d.box.y += 0;
+
+            }
+            if (detections.empty())
+                nextTile = tile::BottomLeft;
+            break;
+
+        case tile::BottomLeft:
+            // --------------------------------
+            // Bottom Left
+            // --------------------------------
+
+            detections = detectOnTile(frameBL);
+            for (auto& d : detections)
+            {
+                d.location = tile::BottomLeft;
+
+                // Move box into full-frame coordinates
+                d.box.x += 0;
+                d.box.y += halfHeight;
+
+            }
+            if (detections.empty())
+                nextTile = tile::BottomRight;
+            break;
+
+        case tile::BottomRight:
+            // --------------------------------
+            // Bottom Right
+            // --------------------------------
+            
+            detections = detectOnTile(frameBR);
+            for (auto& d : detections)
+            {
+                d.location = tile::BottomRight;
+
+                // Move box into full-frame coordinates
+                d.box.x += halfWidth;
+                d.box.y += halfHeight;
+
+            }
+            if (detections.empty())
+                nextTile = tile::Center;
+            break;
+
+        case tile::Center:
+            // --------------------------------
+            // Center
+            // --------------------------------
+        
+            detections = detectOnTile(frameC);
+            for (auto& d : detections)
+            {
+                d.location = tile::Center;
+
+                // Center tile starts at:
+                // x = halfWidth / 2
+                // y = halfHeight / 2
+
+                d.box.x += halfWidth / 2;
+                d.box.y += halfHeight / 2;
+
+            }
+
+            if (detections.empty())
+                nextTile = tile::TopLeft;
+            break;
     }
+   
+   
+    // --------------------------------
+    // Draw bounding boxes
+    // --------------------------------
 
     for (const auto& d : detections)
     {
-        cv::rectangle(frame, d.box, cv::Scalar(0, 255, 0), 3);
-        std::string label = "Cat " + std::to_string(d.confidence);
-        cv::putText(frame, label,
-            cv::Point(d.box.x, d.box.y - 10),
-            cv::FONT_HERSHEY_SIMPLEX, 0.7,
-            cv::Scalar(0, 255, 0), 2);
+        cv::rectangle(
+            frame,
+            d.box,
+            cv::Scalar(0, 255, 0),
+            3
+        );
+
+        std::string label =
+            "Cat " + std::to_string(d.confidence);
+
+        cv::putText(
+            frame,
+            label,
+            cv::Point(
+                d.box.x,
+                d.box.y - 10
+            ),
+            cv::FONT_HERSHEY_SIMPLEX,
+            0.7,
+            cv::Scalar(0, 255, 0),
+            2
+        );
     }
 
-    return detections.empty() ? state::NotFound : state::Found;
+    // --------------------------------
+    // Determine state
+    // --------------------------------
+
+
+    return nextTile;
 }
+
+
 
 
 int cat::getX(std::vector<cat::detection> detections) {
@@ -261,14 +362,25 @@ std::vector<cat::detection> cat::detectOnTile(
         "output0"
     };
 
-    auto outputTensors = session->Run(
-        Ort::RunOptions{nullptr},
-        inputNames,
-        &inputTensor,
-        1,
-        outputNames,
-        1
-    );
+
+    std::vector<Ort::Value> outputTensors;
+
+    try {
+        outputTensors = session->Run(
+            Ort::RunOptions{nullptr},
+            inputNames,
+            &inputTensor,
+            1,
+            outputNames,
+            1
+        );
+    }
+
+    catch (const Ort::Exception& e) {
+        std::cerr << "ONNX Runtime inference failed: "
+                << e.what() << '\n';
+        throw;
+    }
 
     // -------------------------
     // Get YOLO output
@@ -302,8 +414,8 @@ std::vector<cat::detection> cat::detectOnTile(
         float confidence =
             output[(4 + 15) * numCandidates + i];
 
-        std::cout<< "Cat confidence: "<< confidence<< std::endl;
-        if (confidence < 0.20f)
+        //std::cout<< "Cat confidence: "<< confidence<< std::endl;
+        if (confidence < 0.15f)
             continue;
 
         // YOLO coordinates are relative

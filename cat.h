@@ -11,6 +11,7 @@ class cat{
     public:
 
         cat();
+        ~cat();
 
         enum class tile {
             TopLeft,
@@ -42,7 +43,7 @@ class cat{
             int offsetY;
         };
 
-        state detect(cv::Mat& frame);
+        cat::tile detect(cv::Mat& frame, cat::tile targetTile);
 
     private:
         

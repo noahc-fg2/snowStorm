@@ -42,8 +42,11 @@ target_link_libraries(
     "${ONNXRUNTIME_DIR}/lib/libonnxruntime.so"
 )
 
-set_target_properties(
-    snowStorm PROPERTIES
+set(CMAKE_BUILD_RPATH_USE_ORIGIN TRUE)
+
+set_target_properties(snowStorm PROPERTIES
     BUILD_RPATH
-    "${ONNXRUNTIME_DIR}/lib;/usr/local/cuda-12.4/lib64"
+        "${ONNXRUNTIME_DIR}/lib;/opt/cudnn-9.10/lib;/usr/local/cuda-12.4/lib64"
+    INSTALL_RPATH
+        "${ONNXRUNTIME_DIR}/lib;/opt/cudnn-9.10/lib;/usr/local/cuda-12.4/lib64"
 )

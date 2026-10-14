@@ -8,6 +8,10 @@ int main() {
     int i =0;
     bool recording = false;
     cat snow;
+    
+    cat::tile currentTile;
+    cat::tile nextTile = cat::tile::TopLeft;
+    
     cv::VideoCapture cap(0, cv::CAP_V4L2); // Open the default camera
     cap.set(cv::CAP_PROP_FOURCC,
         cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));
@@ -32,11 +36,14 @@ int main() {
     double fps = 0.0;
     
     while (true) {
+        
+        currentTile = nextTile;
+
         cv::Mat frame;
         cap >> frame; // Capture a new frame
         if (frame.empty()) break;
         
-        snow.detect(frame);
+        nextTile = snow.detect(frame, currentTile);
 
         // Calculate FPS
         auto currentTime = std::chrono::steady_clock::now();
@@ -80,7 +87,7 @@ int main() {
             }
         }
     }
-  
+    
     cap.release(); // Release the camera
     cv::destroyAllWindows(); // Destroy all OpenCV windows
     if (writer.isOpened()) {
