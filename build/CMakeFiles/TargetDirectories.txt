@@ -1,3 +1,0 @@
-/home/noah/snowStorm/build/CMakeFiles/snowStorm.dir
-/home/noah/snowStorm/build/CMakeFiles/edit_cache.dir
-/home/noah/snowStorm/build/CMakeFiles/rebuild_cache.dir
